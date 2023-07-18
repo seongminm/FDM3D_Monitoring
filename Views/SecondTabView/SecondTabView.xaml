@@ -1,0 +1,173 @@
+﻿<UserControl x:Class="MonitoringSensor.Views.SecondTabView.SecondTabView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:oxy="clr-namespace:OxyPlot.Wpf;assembly=OxyPlot.Wpf"
+             xmlns:local="clr-namespace:MonitoringSensor.Views.SecondTabView"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.DataContext>
+        <local:SecondTabViewModel/>
+    </UserControl.DataContext>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="769*"/>
+            <ColumnDefinition Width="174*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35*"/>
+            <RowDefinition Height="384*"/>
+        </Grid.RowDefinitions>
+        <DockPanel Height="35" VerticalAlignment="Top" Grid.ColumnSpan="2">
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="_Save" Height="31" Width="40" FontSize="11">
+                    <MenuItem Header="Database" Command="{Binding DatabaseViewModel.MysqlCommand}" IsChecked="{Binding DatabaseViewModel.MysqlState}"/>
+                    <Separator />
+                    <MenuItem Header="Csv File" Command="{Binding CsvViewModel.CsvCommand}" IsChecked="{Binding CsvViewModel.CsvState}" />
+                </MenuItem>
+                <MenuItem Header="_Graph" Height="31" Width="40" FontSize="11">
+                    <MenuItem Header="{Binding GraphContent}" Command="{Binding GraphCommand}"/>
+                    <Separator />
+                    <MenuItem Header="Clear" Command="{Binding GraphClearCommand}"/>
+                </MenuItem>
+            </Menu>
+        </DockPanel>
+        <Grid Grid.Row="1" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="815*"/>
+                <ColumnDefinition Width="127*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Margin="10,0,0,4">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid Margin="0,0,7,7">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Label Content="Humidity" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock Text="{Binding Humidity.Output}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <oxy:PlotView Model="{Binding Humidity.PlotModel}" Grid.Row="2" Margin="0,0,0,-167"/>
+                </Grid>
+                <Grid Margin="0,0,7,7" Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Label Content="PM 1.0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock Text="{Binding Pm1_0.Output}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <oxy:PlotView Model="{Binding Pm1_0.PlotModel}" Grid.Row="2" Margin="0,0,0,-167"/>
+                </Grid>
+                <Grid Margin="0,0,7,7" Grid.Column="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Label Content="PM 2.5" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock Text="{Binding Pm2_5.Output}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <oxy:PlotView Model="{Binding Pm2_5.PlotModel}" Grid.Row="2" Margin="0,0,0,-167"/>
+                </Grid>
+                <Grid Margin="0,0,7,7" Grid.Column="3">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Label Content="PM 10" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock Text="{Binding Pm10.Output}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <oxy:PlotView Model="{Binding Pm10.PlotModel}" Grid.Row="2" Margin="0,0,0,-167"/>
+                </Grid>
+                <Grid Margin="0,0,7,7" Grid.Column="4">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Label Content="PID" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock Text="{Binding Pid.Output}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <oxy:PlotView Model="{Binding Pid.PlotModel}" Grid.Row="2" Margin="0,0,0,-167"/>
+                </Grid>
+                <Grid Margin="0,0,7,7" Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Label Content="Temperature" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock Text="{Binding Temperature.Output}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <oxy:PlotView Model="{Binding Temperature.PlotModel}" Grid.Row="2" Margin="0,0,0,-167"/>
+                </Grid>
+                <Grid Margin="0,0,7,7" Grid.Row="1" Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Label Content="MiCS" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock Text="{Binding Mics.Output}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <oxy:PlotView Model="{Binding Mics.PlotModel}" Grid.Row="2" Margin="0,0,0,-167"/>
+                </Grid>
+                <Grid Margin="0,0,7,7" Grid.Row="1" Grid.Column="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Label Content="CJMCU" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock Text="{Binding Cjmcu.Output}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <oxy:PlotView Model="{Binding Cjmcu.PlotModel}" Grid.Row="2" Margin="0,0,0,-167"/>
+                </Grid>
+                <Grid Margin="0,0,7,7" Grid.Row="1" Grid.Column="3">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Label Content="MQ" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock Text="{Binding Mq.Output}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <oxy:PlotView Model="{Binding Mq.PlotModel}" Grid.Row="2" Margin="0,0,0,-167"/>
+                </Grid>
+                <Grid Margin="0,0,7,7" Grid.Row="1" Grid.Column="4">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Label Content="HCHO" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock Text="{Binding Hcho.Output}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <oxy:PlotView Model="{Binding Hcho.PlotModel}" Grid.Row="2" Margin="0,0,0,-167"/>
+                </Grid>
+            </Grid>
+
+            <Border BorderBrush="Black" BorderThickness="1"  VerticalAlignment="Top" HorizontalAlignment="Right" Width="107" Margin="0,10,10,0" Height="255" Grid.Column="1">
+                <StackPanel Margin="5">
+                    <Label Content="UDP" VerticalAlignment="Center" Background="#FFF6FDFD" HorizontalContentAlignment="Center"/>
+                    <TextBlock Text="{Binding TimerViewModel.TimerContent}" TextAlignment="Center" IsEnabled="False" FontWeight="Bold"/>
+                    <Label Content="Ip"/>
+                    <TextBox Text="{Binding UdpViewModel.Ip}" IsEnabled="{Binding UdpViewModel.UdpState}"  Margin="0" BorderThickness="2,2,1,1" />
+                    <Label Content="Port"/>
+                    <TextBox Text="{Binding UdpViewModel.Port}"  IsEnabled="{Binding UdpViewModel.UdpState}" BorderThickness="2,2,1,1" />
+                    <Label/>
+                    <Button Command="{Binding UdpViewModel.UdpCommand}" Content="{Binding UdpViewModel.UdpContent}" Height="40" BorderThickness="1,1,2,2"/>
+                    <Label/>
+                    <CheckBox Content="Csv" IsEnabled="False" IsChecked= "{Binding CsvViewModel.CsvState}" BorderThickness="2,2,1,1"/>
+                    <Label/>
+                    <CheckBox Content="Mysql" IsEnabled="False" IsChecked="{Binding DatabaseViewModel.MysqlState}" BorderThickness="2,2,1,1"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>
