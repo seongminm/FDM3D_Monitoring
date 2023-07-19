@@ -1,5 +1,7 @@
 ﻿using MonitoringSensor.Services;
 using MonitoringSensor.ViewModels.Command;
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 
@@ -17,7 +19,7 @@ namespace MonitoringSensor.ViewModels
                 OnPropertyChanged(nameof(SerialCommand));
             }
         }
-
+        public RelayCommand SerialPortCommand { get; set; }
         private string _serialContent;
         public string SerialContent
         {
@@ -59,8 +61,21 @@ namespace MonitoringSensor.ViewModels
                 OnPropertyChanged(nameof(SelectedSerialBaudRate));
             }
         }
-        public ObservableCollection<string> SerialPorts { get; set; }
-        public ObservableCollection<int> SerialBaudRate { get; set; }
+        private List<string> serialPorts;
+        public List<string> SerialPorts
+        {
+            get
+            {
+                return serialPorts;
+            }  
+            set
+            {
+                serialPorts = value;
+                OnPropertyChanged(nameof(SerialPorts));
+            }
+            
+        }
+        public List<int> SerialBaudRate { get; set; }
 
 
         private SerialService serialService;
@@ -76,11 +91,19 @@ namespace MonitoringSensor.ViewModels
 
             serialService = new SerialService(this.getDataService);
             SerialCommand = new RelayCommand(OpenSerial);
+            
             SerialContent = "Open";
             SerialState = true;
             SerialPorts = serialService.SerialPorts;
             SerialBaudRate = serialService.SerialBaudRate;
+            SerialPortCommand = new RelayCommand(LoadSerial);
 
+        }
+
+        private void LoadSerial()
+        {
+            serialService.LoadSerialPorts();
+            SerialPorts = serialService.SerialPorts;
         }
 
         private void OpenSerial()
@@ -105,6 +128,14 @@ namespace MonitoringSensor.ViewModels
                 SerialContent = "Open";
                 SerialState = true;
                 timerViewModel.Stop();
+            }
+        }
+
+        public void SendSerial(string message)
+        {
+            if(serialService.isOpen())
+            {
+                serialService.SendSerial(message);
             }
         }
 

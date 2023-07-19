@@ -21,15 +21,18 @@
         </Grid.RowDefinitions>
         <DockPanel Height="35" VerticalAlignment="Top" Grid.ColumnSpan="2">
             <Menu DockPanel.Dock="Top">
-                <MenuItem Header="_Save" Height="31" Width="40" FontSize="11">
+                <MenuItem Header="_Save" Height="34" FontSize="11">
                     <MenuItem Header="Database" Command="{Binding DatabaseViewModel.MysqlCommand}" IsChecked="{Binding DatabaseViewModel.MysqlState}"/>
                     <Separator />
                     <MenuItem Header="Csv File" Command="{Binding CsvViewModel.CsvCommand}" IsChecked="{Binding CsvViewModel.CsvState}" />
                 </MenuItem>
-                <MenuItem Header="_Graph" Height="31" Width="40" FontSize="11">
+                <MenuItem Header="_Graph" FontSize="11">
                     <MenuItem Header="{Binding GraphContent}" Command="{Binding GraphCommand}"/>
                     <Separator />
                     <MenuItem Header="Clear" Command="{Binding GraphClearCommand}"/>
+                </MenuItem>
+                <MenuItem Header="_Option" FontSize="11">
+                    <MenuItem Header="Port Update" Command="{Binding SerialViewModel.SerialPortCommand}"/>
                 </MenuItem>
             </Menu>
         </DockPanel>
@@ -152,7 +155,7 @@
                 </Grid>
             </Grid>
 
-            <Border BorderBrush="Black" BorderThickness="1"  VerticalAlignment="Top" HorizontalAlignment="Right" Width="107"  Height="255" Grid.Column="1">
+            <Border BorderBrush="Black" BorderThickness="1"  VerticalAlignment="Top" HorizontalAlignment="Left" Width="107"  Height="255" Grid.Column="1" Margin="1,0,0,0">
                 <StackPanel Margin="5">
                     <Label Content="Serial" VerticalAlignment="Center" Background="#FFF6FDFD" HorizontalContentAlignment="Center"/>
                     <TextBlock Text="{Binding TimerViewModel.TimerContent}" TextAlignment="Center" IsEnabled="False" FontWeight="Bold"/>

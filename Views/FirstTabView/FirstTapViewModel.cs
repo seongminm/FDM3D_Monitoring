@@ -87,7 +87,6 @@ namespace MonitoringSensor.Views.FirstTabView
             GraphCommand = new RelayCommand(GraphToggle);
             GraphClearCommand = new RelayCommand(ClearGraph);
 
-
         }
 
 

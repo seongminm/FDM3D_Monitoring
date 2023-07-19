@@ -154,6 +154,10 @@
       <DependentUpon>SecondTabView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SecondTabView\SecondTabViewModel.cs" />
+    <Compile Include="Views\ThirdTabView\ThirdTabView.xaml.cs">
+      <DependentUpon>ThirdTabView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ThirdTabView\ThirdTabViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -202,6 +206,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\ThirdTabView\ThirdTabView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

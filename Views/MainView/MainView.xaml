@@ -6,12 +6,13 @@
         xmlns:local="clr-namespace:MonitoringSensor.Views.MainView"
         xmlns:local1="clr-namespace:MonitoringSensor.Views.FirstTabView"
         xmlns:local2="clr-namespace:MonitoringSensor.Views.SecondTabView"
+        xmlns:local3="clr-namespace:MonitoringSensor.Views.ThirdTabView"
         mc:Ignorable="d"
         Title="Monitoring" Height="570" Width="950" MinHeight="570" MinWidth="950">
     <Grid>
         <TabControl Margin="5">
             <TabItem Header="Serial">
-                
+                <local3:ThirdTabView/>
             </TabItem>
             <TabItem Header="UDP">
 

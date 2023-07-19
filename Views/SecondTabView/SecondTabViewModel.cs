@@ -2,11 +2,7 @@
 using MonitoringSensor.ViewModels.Command;
 using MonitoringSensor.ViewModels;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MonitoringSensor.Views.SecondTabView
 {
@@ -57,8 +53,6 @@ namespace MonitoringSensor.Views.SecondTabView
         private double dataCount = 1;
         private string line = $"{"Time"},{"Temperature"},{"Humidity"}, {"PM1.0"}, {"PM2.5"}, {"PM10"}, {"PID"}, {"MICS"}, {"CJMCU"}, {"MQ"}, {"HCHO"}";
 
-
-
         public SecondTabViewModel()
         {
             TimerViewModel = new TimerViewModel();
@@ -86,7 +80,6 @@ namespace MonitoringSensor.Views.SecondTabView
             GraphCommand = new RelayCommand(GraphToggle);
             GraphClearCommand = new RelayCommand(ClearGraph);
         }
-
 
         private void ClearGraph()
         {

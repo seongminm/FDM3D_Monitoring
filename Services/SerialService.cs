@@ -14,21 +14,21 @@ namespace MonitoringSensor.Services
         SerialPort serialPort;
         GetDataService getDataService;
 
-        public ObservableCollection<string> SerialPorts { get; set; }
-        public ObservableCollection<int> SerialBaudRate { get; set; }
+        public List<string> SerialPorts { get; set; }
+        public List<int> SerialBaudRate { get; set; }
 
         public SerialService(GetDataService getDataService)
         {
             this.getDataService = getDataService;
 
             LoadSerialPorts();
-            SerialBaudRate = new ObservableCollection<int> { 9600, 14400, 19200, 38400, 57600, 115200 };
+            SerialBaudRate = new List<int> { 9600, 14400, 19200, 38400, 57600, 115200 };
         }
 
-        private void LoadSerialPorts()
+        public  void LoadSerialPorts()
         {
             var ports = new List<string>(SerialPort.GetPortNames());
-            SerialPorts = new ObservableCollection<string>(ports);
+            SerialPorts = new List<string>(ports);
         }
 
         public void OpenSerial(string portName, string baudRate)
@@ -71,6 +71,10 @@ namespace MonitoringSensor.Services
             return state;
         }
 
+        public void SendSerial(string message)
+        {
+            serialPort.WriteLine(message);
+        }
         private void SerialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             getDataService.StringData = serialPort.ReadLine();
