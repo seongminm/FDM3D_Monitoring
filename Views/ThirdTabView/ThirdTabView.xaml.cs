@@ -24,5 +24,15 @@ namespace MonitoringSensor.Views.ThirdTabView
         {
             InitializeComponent();
         }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TBox.ScrollToEnd();
+        }
+
+        private void TBox2_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TBox.ScrollToEnd();
+        }
     }
 }
