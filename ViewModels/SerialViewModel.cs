@@ -108,18 +108,6 @@ namespace MonitoringSensor.ViewModels
             }
         }
 
-        public void NullMemeory()
-        {
-            if (!SerialState)
-            {
-                serialService.CloseSerial();
-            }
-            serialService = null;
-            timerViewModel = null;
-            getDataService = null;
-            SerialCommand = null;
-        }
-
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)
         {

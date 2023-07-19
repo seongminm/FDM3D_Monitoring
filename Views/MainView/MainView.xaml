@@ -7,13 +7,19 @@
         xmlns:local1="clr-namespace:MonitoringSensor.Views.FirstTabView"
         xmlns:local2="clr-namespace:MonitoringSensor.Views.SecondTabView"
         mc:Ignorable="d"
-        Title="MainView" Height="570" Width="950" MinHeight="570" MinWidth="950">
+        Title="Monitoring" Height="570" Width="950" MinHeight="570" MinWidth="950">
     <Grid>
-        <TabControl>
+        <TabControl Margin="5">
             <TabItem Header="Serial">
-                <local1:FirstTapView/>
+                
             </TabItem>
             <TabItem Header="UDP">
+
+            </TabItem>
+            <TabItem Header="Serial Chart">
+                <local1:FirstTapView/>
+            </TabItem>
+            <TabItem Header="UDP Chart">
                 <local2:SecondTabView/>
             </TabItem>
         </TabControl>
