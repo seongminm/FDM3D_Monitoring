@@ -85,7 +85,7 @@ namespace MonitoringSensor.ViewModels
             udpService.OpenUdp(Ip, Port);
             if (udpService.udpState)
             {
-                udpState = false;
+                UdpState = false;
                 UdpCommand = new RelayCommand(CloseUdp);
                 UdpContent = "Close";
                 timerViewModel.Start();
@@ -101,6 +101,14 @@ namespace MonitoringSensor.ViewModels
                 UdpCommand = new RelayCommand(OpenUdp);
                 UdpContent = "Open";
                 timerViewModel.Stop();
+            }
+        }
+
+        public void SendUdp(string message)
+        {
+            if(udpService.udpState)
+            {
+                udpService.SendUdp(message);
             }
         }
 

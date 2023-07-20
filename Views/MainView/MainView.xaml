@@ -7,6 +7,7 @@
         xmlns:local1="clr-namespace:MonitoringSensor.Views.FirstTabView"
         xmlns:local2="clr-namespace:MonitoringSensor.Views.SecondTabView"
         xmlns:local3="clr-namespace:MonitoringSensor.Views.ThirdTabView"
+        xmlns:local4="clr-namespace:MonitoringSensor.Views.FourthTabView"
         mc:Ignorable="d"
         Title="Monitoring" Height="570" Width="950" MinHeight="570" MinWidth="950">
     <Grid>
@@ -15,7 +16,7 @@
                 <local3:ThirdTabView/>
             </TabItem>
             <TabItem Header="UDP">
-
+                <local4:FourthTabView/>
             </TabItem>
             <TabItem Header="Serial Chart">
                 <local1:FirstTapView/>

@@ -13,6 +13,9 @@ namespace MonitoringSensor.Services
 
         public bool udpState;
 
+        private string ip;
+        private string port;
+
         public UdpService(GetDataService getDataService)
         {
             this.getDataService = getDataService;
@@ -23,6 +26,9 @@ namespace MonitoringSensor.Services
         {
             try
             {
+                this.ip = ip;
+                this.port = port;
+
                 udpClient = new UdpClient(int.Parse(port));
 
                 byte[] data = Encoding.UTF8.GetBytes("abc");
@@ -46,6 +52,12 @@ namespace MonitoringSensor.Services
             udpClient.Close();
         }
 
+        public void SendUdp(string message)
+        {
+            byte[] data = Encoding.UTF8.GetBytes(message);
+            udpClient.Send(data, data.Length, ip, int.Parse(port));
+        }
+
         private void ReceiveCallback(IAsyncResult ar)
         {
             if (udpState)
@@ -53,6 +65,7 @@ namespace MonitoringSensor.Services
                 IPEndPoint ipEndPoint = new IPEndPoint(IPAddress.Any, 0);
                 byte[] receivedBytes = udpClient.EndReceive(ar, ref ipEndPoint);
                 getDataService.StringData = Encoding.UTF8.GetString(receivedBytes); // 바이트 배열을 문자열로 변환               
+                udpClient.BeginReceive(ReceiveCallback, null); // 계속해서 데이터 수신 대기
             }
         }
     }

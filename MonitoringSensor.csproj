@@ -143,6 +143,10 @@
       <DependentUpon>FirstTapView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\FirstTabView\FirstTapViewModel.cs" />
+    <Compile Include="Views\FourthTabView\FourthTabView.xaml.cs">
+      <DependentUpon>FourthTabView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FourthTabView\FourthTabViewModel.cs" />
     <Compile Include="Views\MainView\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
@@ -194,6 +198,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\FourthTabView\FourthTabView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainView\MainView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -211,8 +219,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\FourthTabView\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
