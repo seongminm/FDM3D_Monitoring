@@ -3,25 +3,11 @@ using MonitoringSensor.ViewModels;
 using MonitoringSensor.ViewModels.Command;
 using System;
 using System.ComponentModel;
-using System.Linq;
-using System.Windows.Controls;
-using System.Windows.Input;
 
 namespace MonitoringSensor.Views.ThirdTabView
 {
     class ThirdTabViewModel : INotifyPropertyChanged
     {
-        private double scrollOffset;
-        public double ScrollOffset
-        {
-            get { return scrollOffset; }
-            set
-            {
-                scrollOffset = value;
-                OnPropertyChanged(nameof(ScrollOffset));
-            }
-        }
-
         public SerialViewModel SerialViewModel { get; set; }
         public TimerViewModel TimerViewModel { get; set; }
         public GetDataService getDataService;
@@ -69,7 +55,6 @@ namespace MonitoringSensor.Views.ThirdTabView
                 OnPropertyChanged(nameof(TextBox2));
             }
         }
-        int i = 1;
 
         public ThirdTabViewModel()
         {
@@ -89,16 +74,7 @@ namespace MonitoringSensor.Views.ThirdTabView
 
         private void DataReceived()
         {
-            //if (i > 100)
-            //{
-            //    Text = "";
-            //    i = 1;
-            //    return;
-            //}
             Text += getDataService.StringData + Environment.NewLine;
-            ScrollOffset = double.PositiveInfinity;
-            //i++;
-
         }
 
         private void SendSerial1()

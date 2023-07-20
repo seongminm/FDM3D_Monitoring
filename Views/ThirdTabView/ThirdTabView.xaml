@@ -42,7 +42,7 @@
             </Grid.RowDefinitions>
             <Label Content="Received Data"/>
             <Border BorderBrush="Black" BorderThickness="1" Grid.Row="1" Grid.ColumnSpan="2" Margin="10">
-                <TextBox x:Name="TBox" Text="{Binding Text}" ScrollViewer.VerticalScrollBarVisibility="Visible" TextWrapping="Wrap" TextChanged="TextBox_TextChanged" />
+                <TextBox x:Name="TBox" Text="{Binding Text}" ScrollViewer.VerticalScrollBarVisibility="Visible" TextWrapping="Wrap" TextChanged="TextBox_TextChanged" IsReadOnly="True"/>
             </Border>
             <Label Content="Sent Data" Grid.Row="2"/>
             <Border BorderBrush="Black" BorderThickness="1" Grid.Row="3" Grid.ColumnSpan="2" Margin="10">

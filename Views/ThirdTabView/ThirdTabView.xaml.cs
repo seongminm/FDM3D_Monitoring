@@ -32,7 +32,7 @@ namespace MonitoringSensor.Views.ThirdTabView
 
         private void TBox2_TextChanged(object sender, TextChangedEventArgs e)
         {
-            TBox.ScrollToEnd();
+            TBox2.ScrollToEnd();
         }
     }
 }
