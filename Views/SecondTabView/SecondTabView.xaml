@@ -33,7 +33,7 @@
                 </MenuItem>
             </Menu>
         </DockPanel>
-        <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="1">
+        <Grid Grid.Row="1" Grid.ColumnSpan="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="815*"/>
                 <ColumnDefinition Width="127*"/>
@@ -57,8 +57,16 @@
                         <RowDefinition Height="1*"/>
                     </Grid.RowDefinitions>
                     <Label Content="Humidity" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    <TextBlock Text="{Binding Humidity.Output}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    <oxy:PlotView Model="{Binding Humidity.PlotModel}" Grid.Row="2"  IsMouseWheelEnabled="False"/>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{Binding Humidity.Output}" HorizontalAlignment="Right"/>
+                        <TextBlock Text=" %" Grid.Column="1" HorizontalAlignment="Left"/>
+                    </Grid>
+
+                    <oxy:PlotView Model="{Binding Humidity.PlotModel}" Grid.Row="2" IsMouseWheelEnabled="False"/>
                 </Grid>
                 <Grid Margin="0,0,7,7" Grid.Column="1">
                     <Grid.RowDefinitions>
@@ -67,8 +75,16 @@
                         <RowDefinition Height="1*"/>
                     </Grid.RowDefinitions>
                     <Label Content="PM 1.0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    <TextBlock Text="{Binding Pm1_0.Output}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    <oxy:PlotView Model="{Binding Pm1_0.PlotModel}" Grid.Row="2"   IsMouseWheelEnabled="False"/>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{Binding Pm1_0.Output}" HorizontalAlignment="Right"/>
+                        <TextBlock Text=" ㎍/m³" Grid.Column="1" HorizontalAlignment="Left"/>
+                    </Grid>
+
+                    <oxy:PlotView Model="{Binding Pm1_0.PlotModel}" Grid.Row="2"  IsMouseWheelEnabled="False"/>
                 </Grid>
                 <Grid Margin="0,0,7,7" Grid.Column="2">
                     <Grid.RowDefinitions>
@@ -77,8 +93,15 @@
                         <RowDefinition Height="1*"/>
                     </Grid.RowDefinitions>
                     <Label Content="PM 2.5" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    <TextBlock Text="{Binding Pm2_5.Output}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    <oxy:PlotView Model="{Binding Pm2_5.PlotModel}" Grid.Row="2"   IsMouseWheelEnabled="False"/>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{Binding Pm2_5.Output}" HorizontalAlignment="Right"/>
+                        <TextBlock Text=" ㎍/m³" Grid.Column="1" HorizontalAlignment="Left"/>
+                    </Grid>
+                    <oxy:PlotView Model="{Binding Pm2_5.PlotModel}" Grid.Row="2" IsMouseWheelEnabled="False"/>
                 </Grid>
                 <Grid Margin="0,0,7,7" Grid.Column="3">
                     <Grid.RowDefinitions>
@@ -87,8 +110,15 @@
                         <RowDefinition Height="1*"/>
                     </Grid.RowDefinitions>
                     <Label Content="PM 10" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    <TextBlock Text="{Binding Pm10.Output}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    <oxy:PlotView Model="{Binding Pm10.PlotModel}" Grid.Row="2"   IsMouseWheelEnabled="False"/>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{Binding Pm10.Output}" HorizontalAlignment="Right"/>
+                        <TextBlock Text=" ㎍/m³" Grid.Column="1" HorizontalAlignment="Left"/>
+                    </Grid>
+                    <oxy:PlotView Model="{Binding Pm10.PlotModel}" Grid.Row="2" IsMouseWheelEnabled="False"/>
                 </Grid>
                 <Grid Margin="0,0,7,7" Grid.Column="4">
                     <Grid.RowDefinitions>
@@ -97,8 +127,15 @@
                         <RowDefinition Height="1*"/>
                     </Grid.RowDefinitions>
                     <Label Content="PID" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    <TextBlock Text="{Binding Pid.Output}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    <oxy:PlotView Model="{Binding Pid.PlotModel}" Grid.Row="2"   IsMouseWheelEnabled="False"/>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{Binding Pid.Output}" HorizontalAlignment="Right"/>
+                        <TextBlock Text=" ㎍/m³" Grid.Column="1" HorizontalAlignment="Left"/>
+                    </Grid>
+                    <oxy:PlotView Model="{Binding Pid.PlotModel}" Grid.Row="2"  IsMouseWheelEnabled="False"/>
                 </Grid>
                 <Grid Margin="0,0,7,7" Grid.Row="1">
                     <Grid.RowDefinitions>
@@ -107,8 +144,16 @@
                         <RowDefinition Height="1*"/>
                     </Grid.RowDefinitions>
                     <Label Content="Temperature" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    <TextBlock Text="{Binding Temperature.Output}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    <oxy:PlotView Model="{Binding Temperature.PlotModel}" Grid.Row="2"   IsMouseWheelEnabled="False"/>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{Binding Temperature.Output}" HorizontalAlignment="Right"/>
+                        <TextBlock Text=" ℃" Grid.Column="1" HorizontalAlignment="Left"/>
+                    </Grid>
+
+                    <oxy:PlotView Model="{Binding Temperature.PlotModel}" Grid.Row="2" IsMouseWheelEnabled="False"/>
                 </Grid>
                 <Grid Margin="0,0,7,7" Grid.Row="1" Grid.Column="1">
                     <Grid.RowDefinitions>
@@ -117,8 +162,15 @@
                         <RowDefinition Height="1*"/>
                     </Grid.RowDefinitions>
                     <Label Content="MiCS" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    <TextBlock Text="{Binding Mics.Output}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    <oxy:PlotView Model="{Binding Mics.PlotModel}" Grid.Row="2"   IsMouseWheelEnabled="False"/>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{Binding Mics.Output}" HorizontalAlignment="Right"/>
+                        <TextBlock Text=" (v)" Grid.Column="1" HorizontalAlignment="Left"/>
+                    </Grid>
+                    <oxy:PlotView Model="{Binding Mics.PlotModel}" Grid.Row="2"  IsMouseWheelEnabled="False"/>
                 </Grid>
                 <Grid Margin="0,0,7,7" Grid.Row="1" Grid.Column="2">
                     <Grid.RowDefinitions>
@@ -127,8 +179,15 @@
                         <RowDefinition Height="1*"/>
                     </Grid.RowDefinitions>
                     <Label Content="CJMCU" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    <TextBlock Text="{Binding Cjmcu.Output}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    <oxy:PlotView Model="{Binding Cjmcu.PlotModel}" Grid.Row="2"   IsMouseWheelEnabled="False"/>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{Binding Cjmcu.Output}" HorizontalAlignment="Right"/>
+                        <TextBlock Text=" (v)" Grid.Column="1" HorizontalAlignment="Left"/>
+                    </Grid>
+                    <oxy:PlotView Model="{Binding Cjmcu.PlotModel}" Grid.Row="2" IsMouseWheelEnabled="False"/>
                 </Grid>
                 <Grid Margin="0,0,7,7" Grid.Row="1" Grid.Column="3">
                     <Grid.RowDefinitions>
@@ -137,8 +196,15 @@
                         <RowDefinition Height="1*"/>
                     </Grid.RowDefinitions>
                     <Label Content="MQ" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    <TextBlock Text="{Binding Mq.Output}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    <oxy:PlotView Model="{Binding Mq.PlotModel}" Grid.Row="2"   IsMouseWheelEnabled="False"/>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{Binding Mq.Output}" HorizontalAlignment="Right"/>
+                        <TextBlock Text=" (v)" Grid.Column="1" HorizontalAlignment="Left"/>
+                    </Grid>
+                    <oxy:PlotView Model="{Binding Mq.PlotModel}" Grid.Row="2" IsMouseWheelEnabled="False"/>
                 </Grid>
                 <Grid Margin="0,0,7,7" Grid.Row="1" Grid.Column="4">
                     <Grid.RowDefinitions>
@@ -147,8 +213,15 @@
                         <RowDefinition Height="1*"/>
                     </Grid.RowDefinitions>
                     <Label Content="HCHO" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    <TextBlock Text="{Binding Hcho.Output}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    <oxy:PlotView Model="{Binding Hcho.PlotModel}" Grid.Row="2"   IsMouseWheelEnabled="False"/>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{Binding Hcho.Output}" HorizontalAlignment="Right"/>
+                        <TextBlock Text=" (v)" Grid.Column="1" HorizontalAlignment="Left"/>
+                    </Grid>
+                    <oxy:PlotView Model="{Binding Hcho.PlotModel}" Grid.Row="2" IsMouseWheelEnabled="False"/>
                 </Grid>
             </Grid>
 
