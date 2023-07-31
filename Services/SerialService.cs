@@ -33,12 +33,12 @@ namespace MonitoringSensor.Services
 
         public void OpenSerial(string portName, string baudRate)
         {
-            serialPort = new SerialPort();
-            serialPort.PortName = portName;
-            serialPort.BaudRate = int.Parse(baudRate);
-            serialPort.DataReceived += SerialPort_DataReceived;
             try
             {
+                serialPort = new SerialPort();
+                serialPort.PortName = portName;
+                serialPort.BaudRate = int.Parse(baudRate);
+                serialPort.DataReceived += SerialPort_DataReceived;
                 serialPort.Open();
             }
             catch (Exception ex)

@@ -9,7 +9,7 @@
         xmlns:local3="clr-namespace:MonitoringSensor.Views.ThirdTabView"
         xmlns:local4="clr-namespace:MonitoringSensor.Views.FourthTabView"
         mc:Ignorable="d"
-        Title="Monitoring" Height="570" Width="950" MinHeight="570" MinWidth="950">
+        Title="FDM_Monitoring_Sensor" Height="570" Width="950" MinHeight="570" MinWidth="950">
     <Grid>
         <TabControl Margin="5">
             <TabItem Header="Serial">

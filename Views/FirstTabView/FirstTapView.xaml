@@ -11,12 +11,9 @@
         <local:FirstTapViewModel/>
     </UserControl.DataContext>
     <Grid Background="White">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="0*"/>
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="35*"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="34"/>
             <RowDefinition Height="384*"/>
         </Grid.RowDefinitions>
         <DockPanel Height="35" VerticalAlignment="Top" Grid.ColumnSpan="2">
@@ -36,11 +33,20 @@
                 </MenuItem>
             </Menu>
         </DockPanel>
-        <Grid Grid.Row="1" Grid.ColumnSpan="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="815*"/>
-                <ColumnDefinition Width="127*"/>
-            </Grid.ColumnDefinitions>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="3">
+            <TextBlock Text="{Binding TimerViewModel.TimerContent}" TextAlignment="Center" IsEnabled="False" FontWeight="Bold" Width="88" VerticalAlignment="Center"/>
+            <Label Content="Port"/>
+            <ComboBox ItemsSource="{Binding SerialViewModel.SerialPorts}" SelectedItem="{Binding SerialViewModel.SelectedSerialPort}" IsEnabled="{Binding SerialViewModel.SerialState}" Background="#FFF3EDED" BorderThickness="2,2,1,1" Width="80" VerticalAlignment="Center" />
+            <Label Content="Baud"/>
+            <ComboBox ItemsSource="{Binding SerialViewModel.SerialBaudRate}" SelectedItem="{Binding SerialViewModel.SelectedSerialBaudRate}" IsEnabled="{Binding SerialViewModel.SerialState}"  BorderThickness="2,2,1,1" Width="80" VerticalAlignment="Center" />
+            <Label/>
+            <Button Command="{Binding SerialViewModel.SerialCommand}" Content="{Binding SerialViewModel.SerialContent}"  BorderThickness="1,1,2,2"  Width="60"/>
+            <Label/>
+            <CheckBox Content="Csv" IsEnabled="False" IsChecked= "{Binding CsvViewModel.CsvState}" BorderThickness="2,2,1,1" VerticalAlignment="Center" />
+            <Label/>
+            <CheckBox Content="Mysql" IsEnabled="False" IsChecked="{Binding DatabaseViewModel.MysqlState}" BorderThickness="2,2,1,1" VerticalAlignment="Center"/>
+        </StackPanel>
+        <Grid Grid.Row="2">
             <Grid Margin="10,0,0,4">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
@@ -86,8 +92,8 @@
                         <TextBlock Text="{Binding Pm1_0.Output}" HorizontalAlignment="Right"/>
                         <TextBlock Text=" ㎍/m³" Grid.Column="1" HorizontalAlignment="Left"/>
                     </Grid>
-                    
-                    <oxy:PlotView Model="{Binding Pm1_0.PlotModel}" Grid.Row="2"  IsMouseWheelEnabled="False"/>
+
+                    <oxy:PlotView Model="{Binding Pm1_0.PlotModel}" Grid.Row="2"  IsMouseWheelEnabled="False" AutomationProperties.Name="Test!!"/>
                 </Grid>
                 <Grid Margin="0,0,7,7" Grid.Column="2">
                     <Grid.RowDefinitions>
@@ -155,7 +161,7 @@
                         <TextBlock Text="{Binding Temperature.Output}" HorizontalAlignment="Right"/>
                         <TextBlock Text=" ℃" Grid.Column="1" HorizontalAlignment="Left"/>
                     </Grid>
-                    
+
                     <oxy:PlotView Model="{Binding Temperature.PlotModel}" Grid.Row="2" IsMouseWheelEnabled="False"/>
                 </Grid>
                 <Grid Margin="0,0,7,7" Grid.Row="1" Grid.Column="1">
@@ -227,23 +233,6 @@
                     <oxy:PlotView Model="{Binding Hcho.PlotModel}" Grid.Row="2" IsMouseWheelEnabled="False"/>
                 </Grid>
             </Grid>
-
-            <Border BorderBrush="Black" BorderThickness="1"  VerticalAlignment="Top" HorizontalAlignment="Left" Width="107"  Height="255" Grid.Column="1" Margin="1,0,0,0">
-                <StackPanel Margin="5">
-                    <Label Content="Serial" VerticalAlignment="Center" Background="#FFF6FDFD" HorizontalContentAlignment="Center"/>
-                    <TextBlock Text="{Binding TimerViewModel.TimerContent}" TextAlignment="Center" IsEnabled="False" FontWeight="Bold"/>
-                    <Label Content="Port"/>
-                    <ComboBox ItemsSource="{Binding SerialViewModel.SerialPorts}" SelectedItem="{Binding SerialViewModel.SelectedSerialPort}" IsEnabled="{Binding SerialViewModel.SerialState}" Background="#FFF3EDED" Margin="0" BorderThickness="2,2,1,1" />
-                    <Label Content="Baud"/>
-                    <ComboBox ItemsSource="{Binding SerialViewModel.SerialBaudRate}" SelectedItem="{Binding SerialViewModel.SelectedSerialBaudRate}" IsEnabled="{Binding SerialViewModel.SerialState}"  BorderThickness="2,2,1,1" />
-                    <Label/>
-                    <Button Command="{Binding SerialViewModel.SerialCommand}" Content="{Binding SerialViewModel.SerialContent}" Height="40" BorderThickness="1,1,2,2"/>
-                    <Label/>
-                    <CheckBox Content="Csv" IsEnabled="False" IsChecked= "{Binding CsvViewModel.CsvState}" BorderThickness="2,2,1,1"/>
-                    <Label/>
-                    <CheckBox Content="Mysql" IsEnabled="False" IsChecked="{Binding DatabaseViewModel.MysqlState}" BorderThickness="2,2,1,1"/>
-                </StackPanel>
-            </Border>
         </Grid>
     </Grid>
 </UserControl>
