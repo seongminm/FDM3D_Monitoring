@@ -19,16 +19,16 @@
         <DockPanel Height="35" VerticalAlignment="Top" Grid.ColumnSpan="2">
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="_Save" Height="34" FontSize="11">
-                    <MenuItem Header="Database" Command="{Binding DatabaseViewModel.MysqlCommand}" IsChecked="{Binding DatabaseViewModel.MysqlState}"/>
+                    <MenuItem Header="_Database" Command="{Binding DatabaseViewModel.MysqlCommand}" IsChecked="{Binding DatabaseViewModel.MysqlState}"/>
                     <Separator />
-                    <MenuItem Header="Csv File" Command="{Binding CsvViewModel.CsvCommand}" IsChecked="{Binding CsvViewModel.CsvState}" />
+                    <MenuItem Header="_Csv File" Command="{Binding CsvViewModel.CsvCommand}" IsChecked="{Binding CsvViewModel.CsvState}" />
                 </MenuItem>
-                <MenuItem Header="_Graph" FontSize="11">
+                <MenuItem Header="Graph" FontSize="11">
                     <MenuItem Header="{Binding GraphContent}" Command="{Binding GraphCommand}"/>
                     <Separator />
                     <MenuItem Header="Clear" Command="{Binding GraphClearCommand}"/>
                 </MenuItem>
-                <MenuItem Header="_Option" FontSize="11">
+                <MenuItem Header="Option" FontSize="11">
                     <MenuItem Header="Port Update" Command="{Binding SerialViewModel.SerialPortCommand}"/>
                 </MenuItem>
             </Menu>

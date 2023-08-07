@@ -74,7 +74,7 @@ namespace MonitoringSensor.Views.ThirdTabView
 
         private void DataReceived()
         {
-            Text += getDataService.StringData + Environment.NewLine;
+            Text += getDataService.StringData + "\n";
         }
 
         private void SendSerial1()

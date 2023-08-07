@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.IO.Ports;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace MonitoringSensor.Services
@@ -50,8 +46,8 @@ namespace MonitoringSensor.Services
         }
         public void CloseSerial()
         {
-            serialPort.DataReceived -= SerialPort_DataReceived;
             serialPort.DiscardInBuffer();
+            serialPort.DataReceived -= SerialPort_DataReceived;
             try
             {
                 serialPort.Close();
@@ -77,7 +73,14 @@ namespace MonitoringSensor.Services
         }
         private void SerialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            getDataService.StringData = serialPort.ReadLine();
+            try
+            {
+                getDataService.StringData = serialPort.ReadLine();
+            } catch
+            {
+                return;
+            }
+            
         }
     }
 }
