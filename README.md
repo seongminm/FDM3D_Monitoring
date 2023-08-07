@@ -21,7 +21,7 @@ csv파일 형식, MySQL 데이터베이스에 실시간 데이터를 저장할 �
 센서 모듈의 포트 번호를 확인하거나 상태를 확인해야할 경우 Serial 탭을 통해 모듈의 출력값을 확인하는 기능을 제공합니다.
 
 ## 개발환경
-:heavy_check_mark: WPF .NET Framework 4.7.2 [.NET 4.7.2](https://dotnet.microsoft.com/ko-kr/download/dotnet-framework/net472)
+:heavy_check_mark: WPF [.NET Framework 4.8](https://dotnet.microsoft.com/ko-kr/download/dotnet-framework/net48)
 
 :heavy_check_mark: Visual Studio 2019
 
