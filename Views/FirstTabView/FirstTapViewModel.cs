@@ -58,7 +58,7 @@ namespace MonitoringSensor.Views.FirstTabView
         public RelayCommand GraphClearCommand { get; set; }
 
         private double dataCount = 1;
-        private string line = $"{"Time"},{"Temperature"},{"Humidity"}, {"PM1.0"}, {"PM2.5"}, {"PM10"}, {"PID"}, {"MICS"}, {"CJMCU"}, {"MQ"}, {"HCHO"}";
+        private string line = $"{"Time"},{"Humidity"},{"Temperature"}, {"PM1.0"}, {"PM2.5"}, {"PM10"}, {"VOC"}, {"MICS"}, {"CJMCU"}, {"MQ"}, {"HCHO"}";
 
         public FirstTapViewModel()
         {

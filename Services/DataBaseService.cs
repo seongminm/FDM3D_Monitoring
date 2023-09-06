@@ -27,7 +27,7 @@ namespace MonitoringSensor.Services
                     "`PM1_0` VARCHAR(45) NULL, " +
                     "`PM2_5` VARCHAR(45) NULL, " +
                     "`PM10` VARCHAR(45) NULL, " +
-                    "`PID` VARCHAR(45) NULL, " +
+                    "`VOC` VARCHAR(45) NULL, " +
                     "`MiCS` VARCHAR(45) NULL, " +
                     "`CJMCU` VARCHAR(45) NULL, " +
                     "`MQ` VARCHAR(45) NULL, " +
@@ -53,8 +53,8 @@ namespace MonitoringSensor.Services
         {
             string[] splitData = data.Split('/');
 
-            string insertDataQuery = "INSERT INTO " + tableName + " (Time, Humidity, Temperature, PM1_0, PM2_5, PM10, PID, MiCS, CJMCU, MQ, HCHO) " +
-                        "VALUES (@Time, @Humidity, @Temperature, @PM1_0, @PM2_5, @PM10, @PID, @MiCS, @CJMCU, @MQ, @HCHO);";
+            string insertDataQuery = "INSERT INTO " + tableName + " (Time, Humidity, Temperature, PM1_0, PM2_5, PM10, VOC, MiCS, CJMCU, MQ, HCHO) " +
+                        "VALUES (@Time, @Humidity, @Temperature, @PM1_0, @PM2_5, @PM10, @VOC, @MiCS, @CJMCU, @MQ, @HCHO);";
             MySqlCommand insertDataCommand = new MySqlCommand(insertDataQuery, connection);
 
             insertDataCommand.Parameters.AddWithValue("@Time", timer);
@@ -63,7 +63,7 @@ namespace MonitoringSensor.Services
             insertDataCommand.Parameters.AddWithValue("@PM1_0", splitData[2]);
             insertDataCommand.Parameters.AddWithValue("@PM2_5", splitData[3]);
             insertDataCommand.Parameters.AddWithValue("@PM10", splitData[4]);
-            insertDataCommand.Parameters.AddWithValue("@PID", splitData[5]);
+            insertDataCommand.Parameters.AddWithValue("@VOC", splitData[5]);
             insertDataCommand.Parameters.AddWithValue("@MiCS", splitData[6]);
             insertDataCommand.Parameters.AddWithValue("@CJMCU", splitData[7]);
             insertDataCommand.Parameters.AddWithValue("@MQ", splitData[8]);

@@ -135,14 +135,14 @@
                         <RowDefinition Height="15"/>
                         <RowDefinition Height="1*"/>
                     </Grid.RowDefinitions>
-                    <Label Content="PID" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <Label Content="VOC" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     <Grid Grid.Row="1">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="{Binding Pid.Output}" HorizontalAlignment="Right"/>
-                        <TextBlock Text=" ㎍/m³" Grid.Column="1" HorizontalAlignment="Left"/>
+                        <TextBlock Text=" ppb" Grid.Column="1" HorizontalAlignment="Left"/>
                     </Grid>
                     <oxy:PlotView Model="{Binding Pid.PlotModel}" Grid.Row="2"  IsMouseWheelEnabled="False"/>
                 </Grid>
