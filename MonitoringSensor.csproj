@@ -136,7 +136,6 @@
     <Compile Include="Services\GetDataService.cs" />
     <Compile Include="Services\ICsvService.cs" />
     <Compile Include="Services\IDataBaseService.cs" />
-    <Compile Include="Services\SerialService.cs" />
     <Compile Include="ViewModels\Command\RelayCommand.cs" />
     <Compile Include="ViewModels\CsvViewModel.cs" />
     <Compile Include="ViewModels\DatabaseViewModel.cs" />
@@ -155,6 +154,9 @@
       <DependentUpon>DatabasePopView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\PopView\DatabasePopViewModel.cs" />
+    <Compile Include="Views\SpiTabView\SpiTabView.xaml.cs">
+      <DependentUpon>SpiTabView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SpiTabView\SpiTabViewModel.cs" />
     <Compile Include="Views\ThirdTabView\ThirdTabView.xaml.cs">
       <DependentUpon>ThirdTabView.xaml</DependentUpon>
@@ -198,6 +200,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\PopView\DatabasePopView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SpiTabView\SpiTabView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

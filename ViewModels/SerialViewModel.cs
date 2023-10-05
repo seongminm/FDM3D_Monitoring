@@ -2,13 +2,15 @@
 using MonitoringSensor.ViewModels.Command;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
+using System.IO.Ports;
+using System.Windows;
 
 namespace MonitoringSensor.ViewModels
 {
     class SerialViewModel : ViewModelBase
     {
+        SerialPort serialPort;
+
         private RelayCommand serialCommand;
         public RelayCommand SerialCommand
         {
@@ -17,18 +19,21 @@ namespace MonitoringSensor.ViewModels
            
         }
         public RelayCommand SerialPortCommand { get; set; }
+
         private string serialContent;
         public string SerialContent
         {
             get => serialContent;
             set => SetProperty(ref serialContent, value);
         }
+
         private bool serialState;
         public bool SerialState
         {
             get => serialState;
             set => SetProperty(ref serialState, value);
         }
+
         private string selectedSerialPort;
         public string SelectedSerialPort
         {
@@ -51,8 +56,6 @@ namespace MonitoringSensor.ViewModels
         }
         public List<int> SerialBaudRate { get; set; }
 
-
-        private SerialService serialService;
         private GetDataService getDataService;
 
         TimerViewModel timerViewModel;
@@ -63,28 +66,37 @@ namespace MonitoringSensor.ViewModels
             this.getDataService = getDataService;
             this.timerViewModel = timerViewModel;
 
-            serialService = new SerialService(this.getDataService);
             SerialCommand = new RelayCommand(OpenSerial);
             
             SerialContent = "Open";
             SerialState = true;
-            SerialPorts = serialService.SerialPorts;
-            SerialBaudRate = serialService.SerialBaudRate;
+            SerialPorts = new List<string>(SerialPort.GetPortNames());
+            SerialBaudRate = new List<int> { 9600, 14400, 19200, 38400, 57600, 115200 };
             SerialPortCommand = new RelayCommand(LoadSerial);
 
         }
 
         private void LoadSerial()
         {
-            serialService.LoadSerialPorts();
-            SerialPorts = serialService.SerialPorts;
+            SerialPorts = new List<string>(SerialPort.GetPortNames());
         }
 
         private void OpenSerial()
         {
+            try
+            {
+                serialPort = new SerialPort();
+                serialPort.PortName = SelectedSerialPort;
+                serialPort.BaudRate = int.Parse(SelectedSerialBaudRate);
+                serialPort.DataReceived += SerialPort_DataReceived;
+                serialPort.Open();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "오류", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
 
-            serialService.OpenSerial(SelectedSerialPort, SelectedSerialBaudRate);
-            if (serialService.isOpen())
+            if (serialPort.IsOpen)
             {
                 SerialCommand = new RelayCommand(CloseSerial);
                 SerialContent = "Close";
@@ -95,8 +107,20 @@ namespace MonitoringSensor.ViewModels
 
         public void CloseSerial()
         {
-            serialService.CloseSerial();
-            if (!serialService.isOpen())
+            serialPort.DiscardInBuffer();
+            serialPort.DataReceived -= SerialPort_DataReceived;
+            try
+            {
+                serialPort.Close();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "오류", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            }
+
+            if (!serialPort.IsOpen)
             {
                 SerialCommand = new RelayCommand(OpenSerial);
                 SerialContent = "Open";
@@ -107,10 +131,24 @@ namespace MonitoringSensor.ViewModels
 
         public void SendSerial(string message)
         {
-            if(serialService.isOpen())
+            if(serialPort.IsOpen)
             {
-                serialService.SendSerial(message);
+                serialPort.WriteLine(message);
             }
+        }
+
+
+        private void SerialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            try
+            {
+                getDataService.StringData = serialPort.ReadLine();
+            }
+            catch
+            {
+                return;
+            }
+
         }
 
     }

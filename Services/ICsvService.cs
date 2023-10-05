@@ -8,7 +8,6 @@ namespace MonitoringSensor.Services
 {
     interface ICsvService
     {
-
         bool CsvCreate(string line);
         void CsvAdd(string timer, string data);
         bool CsvClose();

@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MonitoringSensor.Views.MainView"
         xmlns:local1="clr-namespace:MonitoringSensor.Views.FirstTabView"
+        xmlns:local2="clr-namespace:MonitoringSensor.Views.SpiTabView"
         xmlns:local3="clr-namespace:MonitoringSensor.Views.ThirdTabView"
         mc:Ignorable="d"
         Title="FDM Monitoring System" Height="570" Width="950" MinHeight="570" MinWidth="950">
@@ -15,6 +16,9 @@
             </TabItem>
             <TabItem Header="Serial">
                 <local3:ThirdTabView/>
+            </TabItem>
+            <TabItem Header="SPI">
+                <local2:SpiTabView/>
             </TabItem>
         </TabControl>
     </Grid>
