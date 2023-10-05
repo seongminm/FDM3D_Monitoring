@@ -11,7 +11,7 @@ using System.Windows;
 
 namespace MonitoringSensor.Views.FirstTabView
 {
-    internal class FirstTapViewModel : INotifyPropertyChanged
+    internal class FirstTapViewModel : ViewModelBase
     {
         public SerialViewModel SerialViewModel { get; set; }
         public TimerViewModel TimerViewModel { get; set; }
@@ -35,23 +35,15 @@ namespace MonitoringSensor.Views.FirstTabView
         private bool graphState;
         public bool GraphState
         {
-            get { return graphState; }
-            set
-            {
-                graphState = value;
-                OnPropertyChanged(nameof(GraphState));
-            }
+            get => graphState;
+            set => SetProperty(ref graphState, value);
         }
 
         private string graphContent;
         public string GraphContent
         {
-            get { return graphContent; }
-            set
-            {
-                graphContent = value;
-                OnPropertyChanged(nameof(GraphContent));
-            }
+            get => graphContent;
+            set => SetProperty(ref graphContent, value);
         }
 
         public RelayCommand GraphCommand { get; set; }
@@ -174,24 +166,18 @@ namespace MonitoringSensor.Views.FirstTabView
 
             if (CsvViewModel.CsvState)
             {
-                CsvViewModel.Add(formattedTime, data);
+                CsvViewModel.CsvAdd(formattedTime, data);
             }
 
             if (DatabaseViewModel.MysqlState)
             {
-                DatabaseViewModel.AddDatabase(formattedTime, data);
+                DatabaseViewModel.DatabaseAdd(formattedTime, data);
             }
 
 
         }
 
-
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+     
     }
 }
    

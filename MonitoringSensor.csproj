@@ -133,9 +133,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Models\DatabaseModel.cs" />
-    <Compile Include="Services\CsvService.cs" />
-    <Compile Include="Services\DataBaseService.cs" />
     <Compile Include="Services\GetDataService.cs" />
+    <Compile Include="Services\ICsvService.cs" />
+    <Compile Include="Services\IDataBaseService.cs" />
     <Compile Include="Services\SerialService.cs" />
     <Compile Include="ViewModels\Command\RelayCommand.cs" />
     <Compile Include="ViewModels\CsvViewModel.cs" />
@@ -143,6 +143,7 @@
     <Compile Include="ViewModels\SerialViewModel.cs" />
     <Compile Include="ViewModels\TimerViewModel.cs" />
     <Compile Include="ViewModels\OxyPlotViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="Views\FirstTabView\FirstTapView.xaml.cs">
       <DependentUpon>FirstTapView.xaml</DependentUpon>
     </Compile>
@@ -154,6 +155,7 @@
       <DependentUpon>DatabasePopView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\PopView\DatabasePopViewModel.cs" />
+    <Compile Include="Views\SpiTabView\SpiTabViewModel.cs" />
     <Compile Include="Views\ThirdTabView\ThirdTabView.xaml.cs">
       <DependentUpon>ThirdTabView.xaml</DependentUpon>
     </Compile>

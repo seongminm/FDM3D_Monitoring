@@ -1,9 +1,10 @@
-﻿namespace MonitoringSensor.Services
+﻿using System;
+
+namespace MonitoringSensor.Services
 {
     class GetDataService
     {
-        public delegate void DelegateType();
-        public DelegateType Method;
+        public Action Method;
 
         private string stringData;
         public string StringData

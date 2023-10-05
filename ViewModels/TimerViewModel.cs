@@ -4,21 +4,17 @@ using System.Windows.Threading;
 
 namespace MonitoringSensor.ViewModels
 {
-    class TimerViewModel : INotifyPropertyChanged
+    class TimerViewModel : ViewModelBase
     {
         private DispatcherTimer _timer;
         private int _seconds; // 초 단위 시간 변수 선언
 
 
-        private string _timerContent;
+        private string timerContent;
         public string TimerContent
         {
-            get { return _timerContent; }
-            set
-            {
-                _timerContent = value;
-                OnPropertyChanged(nameof(TimerContent));
-            }
+            get => timerContent;
+            set => SetProperty(ref timerContent, value);
         }
 
         public TimerViewModel()
@@ -48,11 +44,6 @@ namespace MonitoringSensor.ViewModels
             TimerContent = "00:00:00";
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+        
     }
 }

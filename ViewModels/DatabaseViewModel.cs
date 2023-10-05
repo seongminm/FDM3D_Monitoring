@@ -2,6 +2,7 @@
 using MonitoringSensor.Services;
 using MonitoringSensor.ViewModels.Command;
 using MonitoringSensor.Views.PopView;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,37 +13,30 @@ using System.Windows;
 
 namespace MonitoringSensor.ViewModels
 {
-    class DatabaseViewModel : INotifyPropertyChanged
+    class DatabaseViewModel : ViewModelBase, IDataBaseService
     {
         DatabasePopView databasePopView;
         DatabasePopViewModel databasePopViewModel;
         DatabaseModel databaseModel;
 
-        private DataBaseService databaseService;
+        private MySqlConnection connection;
+        private string tableName;
+
 
         private bool mysqlState;
         public bool MysqlState
         {
-            get { return mysqlState; }
-            set
-            {
-                mysqlState = value;
-                OnPropertyChanged(nameof(MysqlState));
-            }
+            get => mysqlState;
+            set => SetProperty(ref mysqlState, value);
         }
 
 
         private RelayCommand mysqlCommand;
         public RelayCommand MysqlCommand
         {
-            get { return mysqlCommand; ; }
-            set
-            {
-                mysqlCommand = value;
-                OnPropertyChanged(nameof(MysqlCommand));
-            }
+            get => mysqlCommand;
+            set => SetProperty(ref mysqlCommand, value);
         }
-
 
         public DatabaseViewModel()
         {
@@ -66,9 +60,7 @@ namespace MonitoringSensor.ViewModels
                 return;
             }
 
-            databaseService = new DataBaseService();
-
-            MysqlState = databaseService.OpenDatabase(databaseModel.UserName, databaseModel.Password, databaseModel.Server, databaseModel.DatabaseServer, databaseModel.TableName);
+            MysqlState = DatabaseOpen(databaseModel.UserName, databaseModel.Password, databaseModel.Server, databaseModel.DatabaseServer, databaseModel.TableName);
             if (MysqlState)
             {
                 MysqlCommand = new RelayCommand(CloseDatabase);
@@ -82,23 +74,92 @@ namespace MonitoringSensor.ViewModels
 
         public void CloseDatabase()
         {
-            MysqlState = databaseService.CloseDatabase();
+            MysqlState = DatabaseClose();
             if (!MysqlState)
             {
                 MysqlCommand = new RelayCommand(OpenDatabase);
             }
         }
 
-        public void AddDatabase(string timer, string data)
-        {
 
-            databaseService.AddData(timer, data);
+        // 인터페이스 구현
+        public bool DatabaseOpen(string _userName, string _pw, string _server, string _database, string _tableName)
+        {
+            try
+            {
+                string uid = _userName;
+                string password = _pw;
+                string server = _server;
+                string database = _database;
+                string defaultTableName = DateTime.Now.ToString("yyMMdd_HHmm");
+                tableName = _tableName;
+                string connectionString = $"server={server};database={database};uid={uid};password={password};";
+                connection = new MySqlConnection(connectionString);
+                string createTableQuery = "CREATE TABLE IF NOT EXISTS `" + tableName + "` (`Pk` INT NOT NULL AUTO_INCREMENT, " +
+                    "`Time` VARCHAR(45) NULL, " +
+                    "`Humidity` VARCHAR(45) NULL, " +
+                    "`Temperature` VARCHAR(45) NULL, " +
+                    "`PM1_0` VARCHAR(45) NULL, " +
+                    "`PM2_5` VARCHAR(45) NULL, " +
+                    "`PM10` VARCHAR(45) NULL, " +
+                    "`VOC` VARCHAR(45) NULL, " +
+                    "`MiCS` VARCHAR(45) NULL, " +
+                    "`CJMCU` VARCHAR(45) NULL, " +
+                    "`MQ` VARCHAR(45) NULL, " +
+                    "`HCHO` VARCHAR(45) NULL, " +
+                    "PRIMARY KEY (`Pk`));";
+
+                connection.Open();
+                MySqlCommand createTableCommand = new MySqlCommand(createTableQuery, connection);
+                createTableCommand.ExecuteNonQuery();
+
+                MessageBox.Show(tableName + " Connect !");
+                return true;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+                return false;
+            }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged(string propertyName)
+        public void DatabaseAdd(string timer, string data)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            string[] splitData = data.Split('/');
+
+            string insertDataQuery = "INSERT INTO " + tableName + " (Time, Humidity, Temperature, PM1_0, PM2_5, PM10, VOC, MiCS, CJMCU, MQ, HCHO) " +
+                        "VALUES (@Time, @Humidity, @Temperature, @PM1_0, @PM2_5, @PM10, @VOC, @MiCS, @CJMCU, @MQ, @HCHO);";
+            MySqlCommand insertDataCommand = new MySqlCommand(insertDataQuery, connection);
+
+            insertDataCommand.Parameters.AddWithValue("@Time", timer);
+            insertDataCommand.Parameters.AddWithValue("@Humidity", splitData[0]);
+            insertDataCommand.Parameters.AddWithValue("@Temperature", splitData[1]);
+            insertDataCommand.Parameters.AddWithValue("@PM1_0", splitData[2]);
+            insertDataCommand.Parameters.AddWithValue("@PM2_5", splitData[3]);
+            insertDataCommand.Parameters.AddWithValue("@PM10", splitData[4]);
+            insertDataCommand.Parameters.AddWithValue("@VOC", splitData[5]);
+            insertDataCommand.Parameters.AddWithValue("@MiCS", splitData[6]);
+            insertDataCommand.Parameters.AddWithValue("@CJMCU", splitData[7]);
+            insertDataCommand.Parameters.AddWithValue("@MQ", splitData[8]);
+            insertDataCommand.Parameters.AddWithValue("@HCHO", splitData[9]);
+            insertDataCommand.ExecuteNonQuery();
+        }
+
+        public bool DatabaseClose()
+        {
+            try
+            {
+                connection.Close();
+                MessageBox.Show(tableName + " Disconnect !");
+                return false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+                return true;
+            }
+
         }
     }
 }

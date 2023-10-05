@@ -1,20 +1,17 @@
 ﻿using OxyPlot.Series;
 using OxyPlot;
 using System.ComponentModel;
+using MonitoringSensor.ViewModels;
 
 namespace MonitoringSensor.Views
 {
-    class OxyPlotViewModel : INotifyPropertyChanged
+    class OxyPlotViewModel : ViewModelBase
     {
         private double output;
         public double Output
         {
-            get { return output; }
-            set
-            {
-                output = value;
-                OnPropertyChanged(nameof(Output));
-            }
+            get => output;
+            set => SetProperty(ref output, value);
         }
 
         public PlotModel PlotModel { get; set; }
@@ -45,11 +42,6 @@ namespace MonitoringSensor.Views
             Output = 0;
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
+       
     }
 }
