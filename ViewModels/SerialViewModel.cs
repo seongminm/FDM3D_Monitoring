@@ -10,6 +10,7 @@ namespace MonitoringSensor.ViewModels
     class SerialViewModel : ViewModelBase
     {
         SerialPort serialPort;
+        IGetDataService IGetDataService;
 
         private RelayCommand serialCommand;
         public RelayCommand SerialCommand
@@ -19,6 +20,13 @@ namespace MonitoringSensor.ViewModels
            
         }
         public RelayCommand SerialPortCommand { get; set; }
+
+        private string getData;
+        public string GetData
+        {
+            get => getData;
+            set => SetProperty(ref getData, value);
+        }
 
         private string serialContent;
         public string SerialContent
@@ -56,15 +64,13 @@ namespace MonitoringSensor.ViewModels
         }
         public List<int> SerialBaudRate { get; set; }
 
-        private GetDataService getDataService;
-
         TimerViewModel timerViewModel;
 
-        public SerialViewModel(TimerViewModel timerViewModel, GetDataService getDataService)
+        public SerialViewModel(TimerViewModel timerViewModel, IGetDataService getDataService)
         {
-
-            this.getDataService = getDataService;
+            
             this.timerViewModel = timerViewModel;
+            this.IGetDataService = getDataService;
 
             SerialCommand = new RelayCommand(OpenSerial);
             
@@ -142,7 +148,8 @@ namespace MonitoringSensor.ViewModels
         {
             try
             {
-                getDataService.StringData = serialPort.ReadLine();
+                GetData = serialPort.ReadLine();
+                IGetDataService.GetData();
             }
             catch
             {

@@ -2,15 +2,13 @@
 using MonitoringSensor.ViewModels;
 using MonitoringSensor.ViewModels.Command;
 using System;
-using System.ComponentModel;
 
 namespace MonitoringSensor.Views.ThirdTabView
 {
-    class ThirdTabViewModel : ViewModelBase
+    class ThirdTabViewModel : ViewModelBase, IGetDataService
     {
         public SerialViewModel SerialViewModel { get; set; }
         public TimerViewModel TimerViewModel { get; set; }
-        public GetDataService getDataService;
         public RelayCommand ClearCommand { get; set; }
         public RelayCommand Send1Command { get; set; }
         public RelayCommand Send2Command { get; set; }
@@ -43,10 +41,8 @@ namespace MonitoringSensor.Views.ThirdTabView
         public ThirdTabViewModel()
         {
             TimerViewModel = new TimerViewModel();
-            getDataService = new GetDataService();
+            SerialViewModel = new SerialViewModel(TimerViewModel, this);
 
-            SerialViewModel = new SerialViewModel(TimerViewModel, getDataService);
-            getDataService.Method += DataReceived;
             ClearCommand = new RelayCommand(Clear);
             Send1Command = new RelayCommand(SendSerial1);
             Send2Command = new RelayCommand(SendSerial2);
@@ -54,11 +50,6 @@ namespace MonitoringSensor.Views.ThirdTabView
             TextBox1 = "";
             TextBox2 = "";
 
-        }
-
-        private void DataReceived()
-        {
-            Text += getDataService.StringData + "\n";
         }
 
         private void SendSerial1()
@@ -88,7 +79,9 @@ namespace MonitoringSensor.Views.ThirdTabView
             TextBox2 = "";
         }
 
-       
-
+        public void GetData()
+        {
+            Text += SerialViewModel.GetData + "\n";
+        }
     }
 }

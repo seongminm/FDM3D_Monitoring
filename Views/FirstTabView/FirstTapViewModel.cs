@@ -5,7 +5,7 @@ using System;
 
 namespace MonitoringSensor.Views.FirstTabView
 {
-    internal class FirstTapViewModel : ViewModelBase
+    internal class FirstTapViewModel : ViewModelBase, IGetDataService
     {
         public SerialViewModel SerialViewModel { get; set; }
         public TimerViewModel TimerViewModel { get; set; }
@@ -22,7 +22,6 @@ namespace MonitoringSensor.Views.FirstTabView
 
         public CsvViewModel CsvViewModel { get; set; }
         public DatabaseViewModel DatabaseViewModel { get; set; }
-        public GetDataService getDataService;
 
 
 
@@ -44,12 +43,10 @@ namespace MonitoringSensor.Views.FirstTabView
         public RelayCommand GraphClearCommand { get; set; }
 
         private double dataCount = 1;
-        private string line = $"{"Time"},{"Humidity"},{"Temperature"}, {"PM1.0"}, {"PM2.5"}, {"PM10"}, {"VOC"}, {"MICS"}, {"CJMCU"}, {"MQ"}, {"HCHO"}";
 
         public FirstTapViewModel()
         {
             TimerViewModel = new TimerViewModel();
-            getDataService = new GetDataService();
 
             Humidity = new OxyPlotViewModel();
             Temperature = new OxyPlotViewModel();
@@ -62,11 +59,12 @@ namespace MonitoringSensor.Views.FirstTabView
             Mq = new OxyPlotViewModel();
             Hcho = new OxyPlotViewModel();
 
+            string line = $"{"Time"},{"Humidity"},{"Temperature"}, {"PM1.0"}, {"PM2.5"}, {"PM10"}, {"VOC"}, {"MICS"}, {"CJMCU"}, {"MQ"}, {"HCHO"}";
+
             CsvViewModel = new CsvViewModel(line);
             DatabaseViewModel = new DatabaseViewModel();
 
-            SerialViewModel = new SerialViewModel(TimerViewModel, getDataService);
-            getDataService.Method += DataReceived;
+            SerialViewModel = new SerialViewModel(TimerViewModel, this);
 
             GraphState = true;
             GraphContent = "Stop";
@@ -106,10 +104,10 @@ namespace MonitoringSensor.Views.FirstTabView
             }
         }
 
-        private void DataReceived()
+        
+        public void GetData()
         {
-
-            string data = getDataService.StringData;
+            string data = SerialViewModel.GetData;
             string[] splitData = data.Split('/');
 
             if ((splitData.Length >= 10) && (splitData.Length <= 11))
@@ -167,11 +165,8 @@ namespace MonitoringSensor.Views.FirstTabView
             {
                 DatabaseViewModel.DatabaseAdd(formattedTime, data);
             }
-
-
         }
 
-     
     }
 }
    

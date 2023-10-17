@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace MonitoringSensor.Services
 {
-    interface ICsvService
+    public interface IGetDataService
     {
-        bool CsvCreate(string line);
-        void CsvAdd(string timer, string data);
-        bool CsvClose();
+        void GetData();
     }
 }

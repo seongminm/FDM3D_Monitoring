@@ -133,9 +133,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Models\DatabaseModel.cs" />
-    <Compile Include="Services\GetDataService.cs" />
-    <Compile Include="Services\ICsvService.cs" />
-    <Compile Include="Services\IDataBaseService.cs" />
+    <Compile Include="Services\IGetDataService.cs" />
     <Compile Include="ViewModels\Command\RelayCommand.cs" />
     <Compile Include="ViewModels\CsvViewModel.cs" />
     <Compile Include="ViewModels\DatabaseViewModel.cs" />

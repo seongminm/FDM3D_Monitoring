@@ -4,16 +4,11 @@ using MonitoringSensor.ViewModels.Command;
 using MonitoringSensor.Views.PopView;
 using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace MonitoringSensor.ViewModels
 {
-    class DatabaseViewModel : ViewModelBase, IDataBaseService
+    class DatabaseViewModel : ViewModelBase
     {
         DatabasePopView databasePopView;
         DatabasePopViewModel databasePopViewModel;
@@ -82,7 +77,7 @@ namespace MonitoringSensor.ViewModels
         }
 
 
-        // 인터페이스 구현
+        
         public bool DatabaseOpen(string _userName, string _pw, string _server, string _database, string _tableName)
         {
             try

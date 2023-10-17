@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace MonitoringSensor.Views.SpiTabView
 {
-    class SpiTabViewModel : ViewModelBase
+    class SpiTabViewModel : ViewModelBase, IGetDataService
     {
         public SerialViewModel SerialViewModel { get; set; }
         public TimerViewModel TimerViewModel { get; set; }
         public CsvViewModel CsvViewModel { get; set; }
         public DatabaseViewModel DatabaseViewModel { get; set; }
-        public GetDataService getDataService;
+
 
 
         private double dataCount = 1;
@@ -22,22 +22,22 @@ namespace MonitoringSensor.Views.SpiTabView
         public SpiTabViewModel()
         {
             TimerViewModel = new TimerViewModel();
-            getDataService = new GetDataService();
 
             string line = $"{"Time"},{"Type"},{"Humidity"},{"Temperature"}, {"PM1.0"}, {"PM2.5"}, {"PM10"}, {"VOC"}, {"MICS"}, {"CJMCU"}, {"MQ"}, {"HCHO"}";
 
             CsvViewModel = new CsvViewModel(line);
             DatabaseViewModel = new DatabaseViewModel();
 
-            SerialViewModel = new SerialViewModel(TimerViewModel, getDataService);
-            getDataService.Method += DataReceived;
+            SerialViewModel = new SerialViewModel(TimerViewModel, this);
+
 
         }
 
-        private void DataReceived()
-        {
+        
 
-            string data = getDataService.StringData;
+        public void GetData()
+        {
+            string data = SerialViewModel.GetData;
             string[] splitData = data.Split('/');
 
             if ((splitData.Length >= 10) && (splitData.Length <= 11))
@@ -61,7 +61,7 @@ namespace MonitoringSensor.Views.SpiTabView
                 return;
             }
 
-         
+
 
             DateTime currentTime = DateTime.Now;
             string formattedTime = currentTime.ToString("yy/MM/dd HH:mm:ss");
@@ -75,9 +75,6 @@ namespace MonitoringSensor.Views.SpiTabView
             {
                 DatabaseViewModel.DatabaseAdd(formattedTime, data);
             }
-
-
         }
-
     }
 }

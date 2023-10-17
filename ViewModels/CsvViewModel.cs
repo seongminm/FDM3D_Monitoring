@@ -8,7 +8,7 @@ using System.Windows;
 
 namespace MonitoringSensor.ViewModels
 {
-    class CsvViewModel : ViewModelBase, ICsvService
+    class CsvViewModel : ViewModelBase
     {
 
         private string csvName;
@@ -50,13 +50,12 @@ namespace MonitoringSensor.ViewModels
         }
         public void Close()
         {
-            CsvState = CsvClose();
+            MessageBox.Show(csvName + " Disconnect !");
+            CsvState = false;
             CsvCommand = new RelayCommand(Open);
         }
        
 
-
-        // 인터페이스 구현
         public bool CsvCreate(string line)
         {
             string currentDate = DateTime.Now.ToString("yyMMdd_HHmm");
@@ -97,10 +96,6 @@ namespace MonitoringSensor.ViewModels
             writer.Close();
         }
 
-        public bool CsvClose()
-        {
-            MessageBox.Show(csvName + " Disconnect !");
-            return false;
-        }
+        
     }
 }
