@@ -77,7 +77,7 @@ namespace MonitoringSensor.Views.FirstTabView
 
         private void ClearGraph()
         {
-            dataCount = 0;
+            dataCount = 1;
             Humidity.GrahpClear();
             Temperature.GrahpClear();
             Pm1_0.GrahpClear();
