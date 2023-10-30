@@ -137,6 +137,7 @@
     <Compile Include="ViewModels\Command\RelayCommand.cs" />
     <Compile Include="ViewModels\CsvViewModel.cs" />
     <Compile Include="ViewModels\DatabaseViewModel.cs" />
+    <Compile Include="ViewModels\MultiLinesOxyPlotViewModel.cs" />
     <Compile Include="ViewModels\SerialViewModel.cs" />
     <Compile Include="ViewModels\TimerViewModel.cs" />
     <Compile Include="ViewModels\OxyPlotViewModel.cs" />

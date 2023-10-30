@@ -1,10 +1,7 @@
 ﻿using MonitoringSensor.Services;
 using MonitoringSensor.ViewModels;
+using MonitoringSensor.ViewModels.Command;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MonitoringSensor.Views.SpiTabView
 {
@@ -14,33 +11,77 @@ namespace MonitoringSensor.Views.SpiTabView
         public TimerViewModel TimerViewModel { get; set; }
         public CsvViewModel CsvViewModel { get; set; }
         public DatabaseViewModel DatabaseViewModel { get; set; }
+        public MultiLinesOxyPlotViewModel SensorA { get; set; }
+        public MultiLinesOxyPlotViewModel SensorB { get; set; }
+        public MultiLinesOxyPlotViewModel SensorC { get; set; }
 
+        public MultiLinesOxyPlotViewModel SensorD { get; set; }
 
+        private bool graphState;
+        public bool GraphState
+        {
+            get => graphState;
+            set => SetProperty(ref graphState, value);
+        }
 
-        private double dataCount = 1;
+        private string graphContent;
+        public string GraphContent
+        {
+            get => graphContent;
+            set => SetProperty(ref graphContent, value);
+        }
+
+        public RelayCommand GraphCommand { get; set; }
+        public RelayCommand GraphClearCommand { get; set; }
+
 
         public SpiTabViewModel()
         {
             TimerViewModel = new TimerViewModel();
 
-            string line = $"{"Time"},{"Type"},{"Humidity"},{"Temperature"}, {"PM1.0"}, {"PM2.5"}, {"PM10"}, {"VOC"}, {"MICS"}, {"CJMCU"}, {"MQ"}, {"HCHO"}";
+            string line = $"{"Time"},{"Sensor"},{"Humidity"},{"Temperature"}, {"PM1.0"}, {"PM2.5"}, {"PM10"}, {"VOC"}, {"MICS"}, {"CJMCU"}, {"MQ"}, {"HCHO"}";
 
             CsvViewModel = new CsvViewModel(line);
-            DatabaseViewModel = new DatabaseViewModel();
+            DatabaseViewModel = new DatabaseViewModel(true);
 
             SerialViewModel = new SerialViewModel(TimerViewModel, this);
+            SensorA = new MultiLinesOxyPlotViewModel("A-Sensor");
+            SensorB = new MultiLinesOxyPlotViewModel("B-Sensor");
+            SensorC = new MultiLinesOxyPlotViewModel("C-Sensor");
+            SensorD = new MultiLinesOxyPlotViewModel("D-Sensor");
 
 
+            GraphState = true;
+            GraphContent = "Stop";
+            GraphCommand = new RelayCommand(GraphToggle);
+            GraphClearCommand = new RelayCommand(ClearGraph);
         }
 
-        
+        private void ClearGraph()
+        {
+            SensorA.GraphClear();
+        }
+
+        private void GraphToggle()
+        {
+            if (GraphState)
+            {
+                GraphState = !GraphState;
+                GraphContent = "Live";
+            }
+            else
+            {
+                GraphState = !GraphState;
+                GraphContent = "Stop";
+            }
+        }
 
         public void GetData()
         {
             string data = SerialViewModel.GetData;
             string[] splitData = data.Split('/');
 
-            if ((splitData.Length >= 10) && (splitData.Length <= 11))
+            if ((splitData.Length >= 11) && (splitData.Length <= 12))
             {
 
             }
@@ -50,8 +91,8 @@ namespace MonitoringSensor.Views.SpiTabView
                 return;
             }
 
-            bool bl = double.TryParse(splitData[0], out double result);
-            if ((double.Parse(splitData[3]) < 1000) && bl)
+            bool bl = double.TryParse(splitData[1], out double result);
+            if ((double.Parse(splitData[4]) < 1000) && bl)
             {
 
             }
@@ -61,6 +102,13 @@ namespace MonitoringSensor.Views.SpiTabView
                 return;
             }
 
+            switch (splitData[0]) 
+            {
+                case "A": SensorA.GraphUpdata(data, GraphState); break;
+                case "B": SensorB.GraphUpdata(data, GraphState); break;
+                case "C": SensorC.GraphUpdata(data, GraphState); break;
+                case "D": SensorD.GraphUpdata(data, GraphState); break;
+            }
 
 
             DateTime currentTime = DateTime.Now;
@@ -73,7 +121,7 @@ namespace MonitoringSensor.Views.SpiTabView
 
             if (DatabaseViewModel.MysqlState)
             {
-                DatabaseViewModel.DatabaseAdd(formattedTime, data);
+                DatabaseViewModel.DatabaseAdd(formattedTime, data, true);
             }
         }
     }
