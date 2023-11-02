@@ -56,7 +56,7 @@ namespace MonitoringSensor.ViewModels
         }
        
 
-        public bool CsvCreate(string line)
+        private bool CsvCreate(string line)
         {
             string currentDate = DateTime.Now.ToString("yyMMdd_HHmm");
 

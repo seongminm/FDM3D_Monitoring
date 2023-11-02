@@ -114,7 +114,7 @@ namespace MonitoringSensor.ViewModels
 
 
         
-        public bool DatabaseOpen(string _userName, string _pw, string _server, string _database, string _tableName)
+        private bool DatabaseOpen(string _userName, string _pw, string _server, string _database, string _tableName)
         {
             try
             {
@@ -188,7 +188,7 @@ namespace MonitoringSensor.ViewModels
             insertDataCommand.ExecuteNonQuery();
         }
 
-        public bool DatabaseClose()
+        private bool DatabaseClose()
         {
             try
             {
