@@ -60,6 +60,10 @@ namespace MonitoringSensor.Views.SpiTabView
         private void ClearGraph()
         {
             SensorA.GraphClear();
+            SensorB.GraphClear();
+            SensorC.GraphClear();
+            SensorD.GraphClear();
+
         }
 
         private void GraphToggle()

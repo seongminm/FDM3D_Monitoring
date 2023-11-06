@@ -29,7 +29,7 @@ namespace MonitoringSensor.ViewModels
             {
                 Position = AxisPosition.Left,
                 Minimum = 0, 
-                Maximum = 500  
+                Maximum = 100  
             };
 
             PlotModel.Axes.Add(yAxis);
