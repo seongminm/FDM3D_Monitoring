@@ -50,16 +50,16 @@ namespace MonitoringSensor.Views.SpiTabView
             DatabaseViewModel = new DatabaseViewModel(true);
 
             SerialViewModel = new SerialViewModel(TimerViewModel, this);
-            Humidity = new MultiLinesOxyPlotViewModel("Humidity", 0, 101);
-            Temperature = new MultiLinesOxyPlotViewModel("Temperature",0 ,81);
-            Pm1_0 = new MultiLinesOxyPlotViewModel("PM1.0");
-            Pm2_5 = new MultiLinesOxyPlotViewModel("PM2.5");
-            Pm10 = new MultiLinesOxyPlotViewModel("PM10");
-            Voc = new MultiLinesOxyPlotViewModel("VOC", 0, 21);
-            Mics = new MultiLinesOxyPlotViewModel("Mics", 0, 6);
-            Cjmcu = new MultiLinesOxyPlotViewModel("CJMCU", 0, 6);
-            Mq = new MultiLinesOxyPlotViewModel("MQ" ,0 ,6);
-            Hcho = new MultiLinesOxyPlotViewModel("HCHO", 0, 3);
+            Humidity = new MultiLinesOxyPlotViewModel("Humidity (%)", 0, 101);
+            Temperature = new MultiLinesOxyPlotViewModel("Temperature (℃)",0 ,81);
+            Pm1_0 = new MultiLinesOxyPlotViewModel("PM1.0 (㎍/m³)");
+            Pm2_5 = new MultiLinesOxyPlotViewModel("PM2.5 (㎍/m³)");
+            Pm10 = new MultiLinesOxyPlotViewModel("PM10 (㎍/m³)");
+            Voc = new MultiLinesOxyPlotViewModel("VOC (ppm)", 0, 21);
+            Mics = new MultiLinesOxyPlotViewModel("Mics (v)", 0, 6);
+            Cjmcu = new MultiLinesOxyPlotViewModel("CJMCU (v)", 0, 6);
+            Mq = new MultiLinesOxyPlotViewModel("MQ (v)" ,0 ,6);
+            Hcho = new MultiLinesOxyPlotViewModel("HCHO (v)", 0, 3);
 
 
             GraphState = true;
@@ -76,6 +76,7 @@ namespace MonitoringSensor.Views.SpiTabView
             Pm2_5.GraphClear();
             Pm10.GraphClear();
             Voc.GraphClear();
+            Mics.GraphClear();
             Cjmcu.GraphClear();
             Mq.GraphClear();
             Hcho.GraphClear();
