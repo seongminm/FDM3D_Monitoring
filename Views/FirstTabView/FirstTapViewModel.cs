@@ -105,10 +105,10 @@ namespace MonitoringSensor.Views.FirstTabView
         }
 
         
-        public void GetData()
+        public void GetData(string readData)
         {
-            string data = SerialViewModel.GetData;
-            string[] splitData = data.Split('/');
+            
+            string[] splitData = readData.Split('/');
 
             if ((splitData.Length >= 10) && (splitData.Length <= 11))
             {
@@ -158,12 +158,12 @@ namespace MonitoringSensor.Views.FirstTabView
 
             if (CsvViewModel.CsvState)
             {
-                CsvViewModel.CsvAdd(formattedTime, data);
+                CsvViewModel.CsvAdd(formattedTime, readData);
             }
 
             if (DatabaseViewModel.MysqlState)
             {
-                DatabaseViewModel.DatabaseAdd(formattedTime, data);
+                DatabaseViewModel.DatabaseAdd(formattedTime, readData);
             }
         }
 

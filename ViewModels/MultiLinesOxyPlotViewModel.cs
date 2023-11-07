@@ -1,4 +1,5 @@
-﻿using OxyPlot;
+﻿
+using OxyPlot;
 using OxyPlot.Axes;
 using OxyPlot.Legends;
 using OxyPlot.Series;
@@ -7,92 +8,142 @@ namespace MonitoringSensor.ViewModels
 {
     class MultiLinesOxyPlotViewModel : ViewModelBase
     {
+        public  enum SensorNum {
+            A = 1,
+            B,
+            C,
+            D,
+            E,
+            F,
+            G,
+            H
+        }
+
         public PlotModel PlotModel { get; set; }
-
-        private LineSeries lineHumidity { get; set; }
-        private LineSeries lineTemperature { get; set; }
-        private LineSeries linePm1_0 { get; set; }
-        private LineSeries linePm2_5 { get; set; }
-        private LineSeries linePm10 { get; set; }
-        private LineSeries linePid { get; set; }
-        private LineSeries lineMics { get; set; }
-        private LineSeries lineCjmcu { get; set; }
-        private LineSeries lineMq { get; set; }
-        private LineSeries lineHcho { get; set; }
+        private LineSeries aSensor { get; set; }
+        private LineSeries bSensor { get; set; }
+        private LineSeries cSensor { get; set; }
+        private LineSeries dSensor { get; set; }
+        private LineSeries eSensor { get; set; }
+        private LineSeries fSensor { get; set; }
+        private LineSeries gSensor { get; set; }
+        private LineSeries hSensor { get; set; }
+  
        
-        private int dataCount = 1;
+        private int aDataCount = 1;
+        private int bDataCount = 1;
+        private int cDataCount = 1;
+        private int dDataCount = 1;
+        private int eDataCount = 1;
+        private int fDataCount = 1;
+        private int gDataCount = 1;
+        private int hDataCount = 1;
 
-        public MultiLinesOxyPlotViewModel(string title)
+        public MultiLinesOxyPlotViewModel(string title, double min = 0, double max = 500)
         {
             PlotModel = new PlotModel { Title = title, TitleFontSize = 11 };
             var yAxis = new LinearAxis
             {
                 Position = AxisPosition.Left,
-                Minimum = 0, 
-                Maximum = 100  
+                Minimum = min, 
+                Maximum = max  
             };
 
             PlotModel.Axes.Add(yAxis);
-            
-            lineHumidity = new LineSeries { Title = "Hum" };
-            lineTemperature = new LineSeries { Title = "Tem"};
-            linePm1_0 = new LineSeries { Title = "PM1.0" };
-            linePm2_5 = new LineSeries { Title = "PM2.5" };
-            linePm10 = new LineSeries { Title = "PM10" };
-            linePid = new LineSeries { Title = "VOC" };
-            lineMics = new LineSeries { Title = "Mics" };
-            lineCjmcu = new LineSeries { Title = "Cjmcu" };
-            lineMq = new LineSeries { Title = "MQ" };
-            lineHcho = new LineSeries { Title = "HCHO" };
+
+            aSensor = new LineSeries { Title = "A" };
+            bSensor = new LineSeries { Title = "B"};
+            cSensor = new LineSeries { Title = "C" };
+            dSensor = new LineSeries { Title = "D" };
+            eSensor = new LineSeries { Title = "E" };
+            fSensor = new LineSeries { Title = "F" };
+            gSensor = new LineSeries { Title = "G" };
+            hSensor = new LineSeries { Title = "H" };
+           
 
 
-            PlotModel.Series.Add(lineHumidity);
-            PlotModel.Series.Add(lineTemperature);
-            PlotModel.Series.Add(linePm1_0);
-            PlotModel.Series.Add(linePm2_5);
-            PlotModel.Series.Add(linePm10);
-            PlotModel.Series.Add(linePid);
-            PlotModel.Series.Add(lineMics);
-            PlotModel.Series.Add(lineCjmcu);
-            PlotModel.Series.Add(lineMq);
-            PlotModel.Series.Add(lineHcho);
-
-            PlotModel.Legends.Add(new Legend { LegendTitle = "그래프"});
+            PlotModel.Series.Add(aSensor);
+            PlotModel.Series.Add(bSensor);
+            PlotModel.Series.Add(cSensor);
+            PlotModel.Series.Add(dSensor);
+            PlotModel.Series.Add(eSensor);
+            PlotModel.Series.Add(fSensor);
+            PlotModel.Series.Add(gSensor);
+            PlotModel.Series.Add(hSensor);
+  
+            PlotModel.Legends.Add(new Legend { LegendTitle = "센서"});
         }
 
-        public void GraphUpdata(string data, bool state)
+        public void GraphUpdata(double data, bool state, int sensorNum)
         {
-            string[] splitData = data.Split('/');
+            switch (sensorNum)
+            {
+                case 1:
+                    aSensor.Points.Add(new DataPoint(aDataCount, data));
+                    aDataCount++;
+                    break;
 
-            lineHumidity.Points.Add(new DataPoint(dataCount, double.Parse(splitData[1])));
-            lineTemperature.Points.Add(new DataPoint(dataCount, double.Parse(splitData[2])));
-            linePm1_0.Points.Add(new DataPoint(dataCount, double.Parse(splitData[3])));
-            linePm2_5.Points.Add(new DataPoint(dataCount, double.Parse(splitData[4])));
-            linePm10.Points.Add(new DataPoint(dataCount, double.Parse(splitData[5])));
-            linePid.Points.Add(new DataPoint(dataCount, double.Parse(splitData[6])));
-            lineMics.Points.Add(new DataPoint(dataCount, double.Parse(splitData[7])));
-            lineCjmcu.Points.Add(new DataPoint(dataCount, double.Parse(splitData[8])));
-            lineMq.Points.Add(new DataPoint(dataCount, double.Parse(splitData[9])));
-            lineHcho.Points.Add(new DataPoint(dataCount, double.Parse(splitData[10])));
+                case 2:
+                    bSensor.Points.Add(new DataPoint(bDataCount, data));
+                    bDataCount++;
+                    break;
+
+                case 3:
+                    cSensor.Points.Add(new DataPoint(cDataCount, data));
+                    cDataCount++;
+                    break;
+
+                case 4:
+                    dSensor.Points.Add(new DataPoint(dDataCount, data));
+                    dDataCount++;
+                    break;
+
+                case 5:
+                    eSensor.Points.Add(new DataPoint(eDataCount, data));
+                    eDataCount++;
+                    break;
+
+                case 6:
+                    fSensor.Points.Add(new DataPoint(fDataCount, data));
+                    fDataCount++;
+                    break;
+
+                case 7:
+                    gSensor.Points.Add(new DataPoint(gDataCount, data));
+                    gDataCount++;
+                    break;
+
+                case 8:
+                    hSensor.Points.Add(new DataPoint(hDataCount, data));
+                    hDataCount++;
+                    break;
+            }
 
             PlotModel.InvalidatePlot(state);
-            dataCount++;
+
+
+
         }
 
         public void GraphClear()
         {
-            lineHumidity.Points.Clear();
-            lineTemperature.Points.Clear();
-            linePm1_0.Points.Clear();
-            linePm2_5.Points.Clear();
-            linePm10.Points.Clear();
-            linePid.Points.Clear();
-            lineMics.Points.Clear();
-            lineCjmcu.Points.Clear();
-            lineMq.Points.Clear();
-            lineHcho.Points.Clear();
+            aSensor.Points.Clear();
+            bSensor.Points.Clear();
+            cSensor.Points.Clear();
+            dSensor.Points.Clear();
+            eSensor.Points.Clear();
+            fSensor.Points.Clear();
+            gSensor.Points.Clear();
+            hSensor.Points.Clear();
 
-            dataCount = 1;
+            aDataCount = 1;
+            bDataCount = 1;
+            cDataCount = 1;
+            dDataCount = 1;
+            eDataCount = 1;
+            fDataCount = 1;
+            gDataCount = 1;
+            hDataCount = 1;
 
             PlotModel.InvalidatePlot(true);
             

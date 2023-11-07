@@ -79,9 +79,9 @@ namespace MonitoringSensor.Views.ThirdTabView
             TextBox2 = "";
         }
 
-        public void GetData()
+        public void GetData(string readData)
         {
-            Text += SerialViewModel.GetData + "\n";
+            Text += readData + "\n";
         }
     }
 }

@@ -48,38 +48,48 @@
         </StackPanel>
         <Grid Grid.Row="2">
             <Grid Margin="10,0,0,4">
-              
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <Grid Margin="0,0,7,7">
-                    <oxy:PlotView Model="{Binding SensorA.PlotModel}" IsMouseWheelEnabled="False"/>
+                    <oxy:PlotView Model="{Binding Humidity.PlotModel}" IsMouseWheelEnabled="False"/>
                 </Grid>
                 <Grid Margin="0,0,7,7" Grid.Column="1">
-                    <oxy:PlotView Model="{Binding SensorB.PlotModel}" IsMouseWheelEnabled="False" AutomationProperties.Name="Test!!"/>
+                    <oxy:PlotView Model="{Binding Pm1_0.PlotModel}" IsMouseWheelEnabled="False" AutomationProperties.Name="Test!!"/>
                 </Grid>
                 <Grid Margin="0,0,7,7" Grid.Column="2">
-                    <oxy:PlotView Model="{Binding SensorC.PlotModel}" IsMouseWheelEnabled="False"/>
+                    <oxy:PlotView Model="{Binding Pm2_5.PlotModel}" IsMouseWheelEnabled="False"/>
                 </Grid>
                 <Grid Margin="0,0,7,7" Grid.Column="3">
-                    <oxy:PlotView Model="{Binding SensorD.PlotModel}" IsMouseWheelEnabled="False"/>
+                    <oxy:PlotView Model="{Binding Pm10.PlotModel}" IsMouseWheelEnabled="False"/>
+                </Grid>
+                <Grid Margin="0,0,7,7" Grid.Column="4">
+                    <oxy:PlotView Model="{Binding Voc.PlotModel}" IsMouseWheelEnabled="False"/>
                 </Grid>
 
-                <!--<Grid Margin="0,0,7,7" Grid.Row="1">
-                    <oxy:PlotView Model="{Binding SensorE.PlotModel}" Grid.Row="2" IsMouseWheelEnabled="False"/>
+                <Grid Margin="0,0,7,7" Grid.Row="1">
+                    <oxy:PlotView Model="{Binding Temperature.PlotModel}" Grid.Row="2" IsMouseWheelEnabled="False"/>
                 </Grid>
                 <Grid Margin="0,0,7,7" Grid.Row="1" Grid.Column="1">
-                    <oxy:PlotView Model="{Binding SensorF.PlotModel}" Grid.Row="2" IsMouseWheelEnabled="False"/>
+                    <oxy:PlotView Model="{Binding Mics.PlotModel}" Grid.Row="2" IsMouseWheelEnabled="False"/>
                 </Grid>
                 <Grid Margin="0,0,7,7" Grid.Row="1" Grid.Column="2">
-                    <oxy:PlotView Model="{Binding SensorG.PlotModel}" Grid.Row="2" IsMouseWheelEnabled="False"/>
+                    <oxy:PlotView Model="{Binding Cjmcu.PlotModel}" Grid.Row="2" IsMouseWheelEnabled="False"/>
                 </Grid>
                 <Grid Margin="0,0,7,7" Grid.Row="1" Grid.Column="3">
-                    <oxy:PlotView Model="{Binding SensorH.PlotModel}" Grid.Row="2" IsMouseWheelEnabled="False"/>
-                </Grid>-->
+                    <oxy:PlotView Model="{Binding Mq.PlotModel}" Grid.Row="2" IsMouseWheelEnabled="False"/>
+                </Grid>
+                <Grid Margin="0,0,7,7" Grid.Row="1" Grid.Column="4">
+                    <oxy:PlotView Model="{Binding Hcho.PlotModel}" Grid.Row="2" IsMouseWheelEnabled="False"/>
+                </Grid>
             </Grid>
         </Grid>
     </Grid>

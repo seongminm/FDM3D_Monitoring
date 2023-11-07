@@ -21,13 +21,6 @@ namespace MonitoringSensor.ViewModels
         }
         public RelayCommand SerialPortCommand { get; set; }
 
-        private string getData;
-        public string GetData
-        {
-            get => getData;
-            set => SetProperty(ref getData, value);
-        }
-
         private string serialContent;
         public string SerialContent
         {
@@ -148,8 +141,7 @@ namespace MonitoringSensor.ViewModels
         {
             try
             {
-                GetData = serialPort.ReadLine();
-                IGetDataService.GetData();
+                IGetDataService.GetData(serialPort.ReadLine());
             }
             catch
             {
