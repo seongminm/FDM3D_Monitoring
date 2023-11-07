@@ -120,6 +120,7 @@ namespace MonitoringSensor.Views.SpiTabView
                 } catch (Exception e) 
                 {
                     TimerViewModel.TimerContent = "???";
+                    return;
                 }
                 
             }
@@ -136,7 +137,7 @@ namespace MonitoringSensor.Views.SpiTabView
 
 
             int sensorNum = 0;
-
+            
             switch (splitData[0]) 
             {
                 case "A":
