@@ -8,7 +8,7 @@
         xmlns:local2="clr-namespace:MonitoringSensor.Views.SpiTabView"
         xmlns:local3="clr-namespace:MonitoringSensor.Views.ThirdTabView"
         mc:Ignorable="d"
-        Title="FDM Monitoring System" Height="570" Width="950" MinHeight="570" MinWidth="950">
+        Title="FDM Monitoring System" Height="570" Width="950">
     <Grid>
         <TabControl Margin="5">
             <TabItem Header="Serial Chart">
