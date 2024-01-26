@@ -1,24 +1,36 @@
 ﻿<Window x:Class="MonitoringSensor.Views.MainView.MainView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MonitoringSensor.Views.MainView"
         xmlns:local1="clr-namespace:MonitoringSensor.Views.FirstTabView"
         xmlns:local2="clr-namespace:MonitoringSensor.Views.SpiTabView"
         xmlns:local3="clr-namespace:MonitoringSensor.Views.ThirdTabView"
+        xmlns:local4="clr-namespace:MonitoringSensor.Views.SensorView"
         mc:Ignorable="d"
         Title="FDM Monitoring System" Height="570" Width="950">
     <Grid>
         <TabControl Margin="5">
-            <TabItem Header="Serial Chart">
+
+            <TabItem>
+                <TabItem.Header>
+                    <iconPacks:PackIconMaterialLight Kind="ChartAreaspline" />
+                </TabItem.Header>
                 <local1:FirstTapView/>
             </TabItem>
             <TabItem Header="Serial">
                 <local3:ThirdTabView/>
             </TabItem>
-            <TabItem Header="SPI">
+            <!--<TabItem Header="SPI">
                 <local2:SpiTabView/>
+            </TabItem>-->
+            <TabItem>
+                <TabItem.Header>
+                    <iconPacks:PackIconForkAwesome Kind="Desktop" />
+                </TabItem.Header>
+                <local4:SensorView/>
             </TabItem>
         </TabControl>
     </Grid>
